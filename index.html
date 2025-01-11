@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shithole.fun</title>
+    <style>
+        :root {
+            --background: #111827;
+            --accent-green: #4fffb0;
+            --text: #ffffff;
+            --container-bg: #1f2937;
+            --hover-bg: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--background);
+            padding: 1rem;
+            display: flex;
+            justify-content: center; /* Center the logo container */
+            border-bottom: 2px solid var(--accent-green);
+        }
+
+        .logo {
+            display: inline-flex;  /* Changed to inline-flex for centering */
+            align-items: center;
+            gap: 1rem;
+            justify-content: center; /* Added for logo centering */
+        }
+
+        .logo img {
+            height: 100px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .logo span {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .search-box {
+            margin-bottom: 2.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid var(--container-bg);
+            border-radius: 12px;
+            background-color: var(--container-bg);
+            color: var(--text);
+            transition: all 0.2s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(79, 255, 176, 0.2);
+        }
+
+        .leaderboard {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .leaderboard li {
+            background: var(--container-bg);
+            padding: 1.25rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .leaderboard li:hover {
+            background: var(--hover-bg);
+            transform: translateY(-2px);
+        }
+
+        .city-info {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .rank {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            min-width: 2rem;
+        }
+
+        .flag {
+            font-size: 1.5rem;
+        }
+
+        .vote-button {
+            background-color: var(--accent-green);
+            color: var(--background);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .vote-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(79, 255, 176, 0.4);
+        }
+
+        .about-section {
+            margin-top: 3rem;
+            background: var(--container-bg);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .about-title {
+            font-size: 1.75rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .contract-box {
+            margin-top: 1.5rem;
+            background: var(--background);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .contract-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+
+        .contract-address {
+            background: var(--container-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Monaco', monospace;
+        }
+
+        .copy-button {
+            background: var(--accent-green);
+            color: var(--background);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: var(--container-bg);
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.05);
+        }
+
+        .tooltip {
+            position: fixed;
+            background: var(--accent-green);
+            color: var(--background);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .leaderboard li {
+                padding: 1rem;
+            }
+
+            .city-info {
+                gap: 0.75rem;
+            }
+
+            .vote-button {
+                padding: 0.5rem 1rem;
+            }
+
+            .about-section {
+                padding: 1.5rem;
+            }
+
+            .contract-address {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .copy-button {
+                width: 100%;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .leaderboard li {
+                transition: transform 0.2s ease;
+            }
+
+            .leaderboard li:hover {
+                transform: scale(1.02);
+            }
+        }
+        .voting-history {
+            background: var(--container-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .voting-history h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .voting-history-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .voting-history-item {
+            background: var(--hover-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stats-container {
+            background: var(--container-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--hover-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./logo.29.20-removebg-preview.png" alt="Logo">
+        </div>
+    </header>
+
+    <main>
+        <h1>Shithole Leaderboard</h1>
+        <div class="stats-container" id="stats-container">
+            <!-- Stats will be populated by JavaScript -->
+        </div>
+        <div class="voting-history">
+            <h3>Your Voting History</h3>
+            <ul class="voting-history-list" id="voting-history">
+                <!-- Voting history will be populated by JavaScript -->
+            </ul>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-country" placeholder="Search countries...">
+        </div>
+
+        <ul class="leaderboard" id="leaderboard"></ul>
+
+        <div class="about-section">
+            <h2 class="about-title">About Shithole</h2>
+            <p class="about-text">A definitive ranking of countries, as voted by you, the Pump.Fun degens.</p>
+            <div class="contract-box">
+                <div class="contract-label">
+                    <span>Contract Address</span>
+                    <span>SOL</span>
+                </div>
+                <div class="contract-address">
+                    <span id="contract-text">Soon</span>
+                    <button class="copy-button" onclick="copyContract()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://t.me/shithole_community" target="_blank" class="social-link">
+                Telegram
+            </a>
+            <a href="#" class="social-link">
+                PumpFun
+            </a>
+        </div>
+    </footer>
+
+    <div class="tooltip" id="tooltip">Copied! 📋</div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:5000'; // Updated API URL
+    
+        async function fetchStats() {
+            try {
+                const response = await fetch(`${API_URL}/stats`);
+                if (!response.ok) throw new Error('Failed to fetch stats');
+                const data = await response.json();
+                updateStats(data);
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        }
+    
+        function updateStats(stats) {
+            const statsContainer = document.getElementById('stats-container');
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${stats.unique_voters}</div>
+                    <div class="stat-label">Unique Voters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.total_votes}</div>
+                    <div class="stat-label">Total Votes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.votes_per_ip_average.toFixed(2)}</div>
+                    <div class="stat-label">Avg Votes per IP</div>
+                </div>
+            `;
+        }
+    
+        async function fetchVotingHistory() {
+            try {
+                const response = await fetch(`${API_URL}/my-votes`);
+                if (!response.ok) throw new Error('Failed to fetch voting history');
+                const data = await response.json();
+                updateVotingHistory(data.votes);
+            } catch (error) {
+                console.error('Error fetching voting history:', error);
+            }
+        }
+    
+        function updateVotingHistory(votes) {
+            const historyElement = document.getElementById('voting-history');
+            historyElement.innerHTML = votes.length
+                ? votes
+                      .map(vote => `
+                          <li class="voting-history-item">
+                              <span>${vote.country}</span>
+                              <span>${new Date(vote.timestamp).toLocaleString()}</span>
+                          </li>
+                      `)
+                      .join('')
+                : '<li class="voting-history-item">No votes yet</li>';
+        }
+    
+        async function fetchLeaderboard() {
+            try {
+                const response = await fetch(`${API_URL}/leaderboard`);
+                if (!response.ok) throw new Error('Failed to fetch leaderboard');
+                const data = await response.json();
+                updateLeaderboard(data.leaderboard);
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+            }
+        }
+    
+        function updateLeaderboard(leaderboard) {
+            const leaderboardElement = document.getElementById('leaderboard');
+            leaderboardElement.innerHTML = leaderboard
+                .map(
+                    (item, index) => `
+                    <li>
+                        <div class="city-info">
+                            <span class="rank">${index + 1}.</span>
+                            <span class="flag">${item.flag}</span>
+                            <span>${item.country} (${item.percentage}%)</span>
+                        </div>
+                        <button class="vote-button" onclick="vote('${item.country}')">Vote</button>
+                    </li>
+                `
+                )
+                .join('');
+        }
+    
+        async function vote(country) {
+            try {
+                const response = await fetch(`${API_URL}/vote`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ country }),
+                });
+                if (!response.ok) throw new Error('Failed to record vote');
+                const result = await response.json();
+                updateLeaderboard(result.leaderboard);
+                updateVotingHistory(result.user_votes.votes);
+                fetchStats();
+                alert(`Thanks for voting for ${country}! 🎉`);
+            } catch (error) {
+                alert('Error recording vote. Please try again.');
+                console.error('Error voting:', error);
+            }
+        }
+    
+        function copyContract() {
+            const contractText = document.getElementById('contract-text').textContent;
+            navigator.clipboard.writeText(contractText).then(() => {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.style.opacity = '1';
+                setTimeout(() => (tooltip.style.opacity = '0'), 2000);
+            });
+        }
+    
+        document.getElementById('search-country').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('#leaderboard li');
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    
+        async function initialize() {
+            await Promise.all([fetchLeaderboard(), fetchVotingHistory(), fetchStats()]);
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            initialize();
+            setInterval(initialize, 30000); // Refresh every 30 seconds
+        });
+    </script>
+    
+</body>
+</html>
